@@ -1,4 +1,9 @@
 @import './base.css';
+@import "tailwindcss";
+
+@theme {
+  --font-sans: InterVariable, sans-serif;
+}
 
 #app {
   max-width: 1280px;
