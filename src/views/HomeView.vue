@@ -1,48 +1,41 @@
 <template>
-  <div class="bg-gray-100">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+  <div>
+    <CategoryCollection :categories="categories" >
+      <div class="flex items-center justify-between text-sm text-blue-700 font-semibold">
         <h2 class="text-2xl font-bold text-gray-900">Collections</h2>
-
-        <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <div v-for="callout in callouts" :key="callout.name" class="group relative">
-            <img :src="callout.imageSrc" :alt="callout.imageAlt" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-2/1 lg:aspect-square" />
-            <h3 class="mt-6 text-sm text-gray-500">
-              <a :href="callout.href">
-                <span class="absolute inset-0" />
-                {{ callout.name }}
-              </a>
-            </h3>
-            <p class="text-base font-semibold text-gray-900">{{ callout.description }}</p>
-          </div>
-        </div>
+        <a class="" href="#"> Browse all categories</a>
       </div>
-    </div>
+    </CategoryCollection>
   </div>
 </template>
 
 <script setup>
-const callouts = [
+import CategoryCollection from '@/components/CategoryCollection.vue'
+
+const categories = [
   {
-    name: 'Desk and Office',
-    description: 'Work from home accessories',
-    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-edition-01.jpg',
-    imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-    href: '#',
+    "id": 2,
+    "name": "Electronics2",
+    "slug": "electronics2",
+    "image": "https://i.imgur.com/ZANVnHE.jpeg",
+    "creationAt": "2025-04-10T21:22:01.000Z",
+    "updatedAt": "2025-04-11T05:11:36.000Z"
   },
   {
-    name: 'Self-Improvement',
-    description: 'Journals and note-taking',
-    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-edition-02.jpg',
-    imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-    href: '#',
+    "id": 3,
+    "name": "Furniture",
+    "slug": "furniture",
+    "image": "https://i.imgur.com/Qphac99.jpeg",
+    "creationAt": "2025-04-10T21:22:01.000Z",
+    "updatedAt": "2025-04-10T21:22:01.000Z"
   },
   {
-    name: 'Travel',
-    description: 'Daily commute essentials',
-    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-edition-03.jpg',
-    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-    href: '#',
+    "id": 4,
+    "name": "Shoes",
+    "slug": "shoes",
+    "image": "https://i.imgur.com/qNOjJje.jpeg",
+    "creationAt": "2025-04-10T21:22:01.000Z",
+    "updatedAt": "2025-04-10T21:22:01.000Z"
   },
 ]
 </script>
