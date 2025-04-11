@@ -1,21 +1,32 @@
 <template>
   <div class="group relative">
     <img
-      :src="category.image"
-      :alt="category.name"
+      :src="image"
+      :alt="name"
       class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-2/1 lg:aspect-square"
     />
     <h3 class="mt-6 text-sm text-gray-500">
-      <a :href="category.slug">
+      <a :href="slug">
         <span class="absolute inset-0" />
-        {{ category.name }}
+        {{ name }}
       </a>
     </h3>
   </div>
 </template>
 
 <script setup>
-const { category } = defineProps({
-  category: Object,
+const { name, image, slug } = defineProps({
+  name : {
+    type: String,
+    required: true
+  },
+  slug : {
+    type: String,
+    required: true
+  },
+  image : {
+    type: String,
+    required: true
+  }
 })
 </script>

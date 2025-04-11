@@ -4,7 +4,13 @@
       <slot></slot>
 
       <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <CategoryItem v-for="category in categories" :key="category.name" :category="category" />
+        <CategoryItem
+          v-for="{ name, image, slug } in categories"
+          :key="name"
+          :image="image"
+          :name="name"
+          :slug="slug"
+        />
       </div>
     </div>
   </div>
