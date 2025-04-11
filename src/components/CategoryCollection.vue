@@ -4,9 +4,7 @@
       <slot></slot>
 
       <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-        <template v-for="category in categories" :key="category.name">
-          <CategoryItem :category="category" />
-        </template>
+          <CategoryItem v-for="category in categories" :key="category.name" :category="category" />
       </div>
     </div>
   </div>
