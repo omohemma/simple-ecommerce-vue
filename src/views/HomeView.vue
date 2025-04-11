@@ -1,12 +1,31 @@
 <template>
   <div>
-    <CategoryCollection :categories="categories" >
-      <div class="flex items-center justify-between text-sm text-blue-700 font-semibold">
-        <h2 class="text-2xl font-bold text-gray-900">Shop by Category</h2>
-        <a class="" href="#"> Browse all categories</a>
-      </div>
-      <p class="text-base mt-2 font-light text-gray-900">Explore a wide variety of products by browsing through our categorized collections.</p>
-    </CategoryCollection>
+    <!--    Category Collection-->
+    <section class="bg-gray-100">
+      <CategoryCollection :categories="categories">
+        <div class="flex items-center justify-between text-sm text-blue-700 font-semibold">
+          <h2 class="text-2xl font-bold text-gray-900">Shop by Category</h2>
+          <a class="" href="#"> Browse all categories</a>
+        </div>
+        <p class="text-base mt-2 font-light text-gray-900">
+          Explore a wide variety of products by browsing through our categorized collections.
+        </p>
+      </CategoryCollection>
+    </section>
+
+    <!--  Favorites Products  -->
+    <section class="bg-white">
+      <ProductListing :products="products">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Your Favorite Products</h2>
+      </ProductListing>
+    </section>
+
+    <!--  Last Viewed Products  -->
+    <section class="bg-gray-100">
+      <ProductListing :products="products">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Your Last Viewed Products</h2>
+      </ProductListing>
+    </section>
   </div>
 </template>
 
