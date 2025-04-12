@@ -9,10 +9,10 @@
       <div class="my-4 flex justify-between">
         <div>
           <h3 class="text-sm text-gray-700">
-            <a :href="slug">
+            <router-link :to="{ name: 'product', params: { slug: slug } }">
               <span aria-hidden="true" class="absolute inset-0" />
               {{ title }}
-            </a>
+            </router-link>
           </h3>
         </div>
         <p class="text-sm font-medium text-gray-900">${{ price }}</p>
