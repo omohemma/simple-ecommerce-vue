@@ -29,6 +29,9 @@ const router = createRouter({
       component: () => import('../views/FavoritesView.vue'),
     }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { left: 0, top: 0 }
+  }
 })
 
 export default router
