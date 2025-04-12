@@ -7,7 +7,7 @@
           class="flex flex-wrap items-center justify-between text-sm text-blue-700 font-semibold"
         >
           <h2 class="text-2xl font-bold text-gray-900">Shop by Category</h2>
-          <a class="" href="#"> Browse all categories</a>
+          <router-link class="" :to="{'name': 'categories'}"> Browse all categories</router-link>
         </div>
         <p class="text-base mt-2 font-light text-gray-900">
           Explore a wide variety of products by browsing through our categorized collections.

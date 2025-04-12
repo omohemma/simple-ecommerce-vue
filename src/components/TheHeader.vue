@@ -43,9 +43,9 @@
               <!-- Links -->
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <a :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{
+                  <router-link  :to="{ name: page.href }" class="-m-2 block p-2 font-medium text-gray-900">{{
                     page.name
-                  }}</a>
+                  }}</router-link>
                 </div>
               </div>
             </DialogPanel>
@@ -70,25 +70,25 @@
 
             <!-- Logo -->
             <div class="ml-4 flex lg:ml-0">
-              <a href="#">
+              <router-link  :to="{ name: 'home' }">
                 <span class="sr-only">Your Company</span>
                 <img
                   class="h-8 w-auto"
                   src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                   alt=""
                 />
-              </a>
+              </router-link>
             </div>
 
             <!-- Flyout menus -->
             <PopoverGroup class="hidden lg:ml-8 lg:block">
               <div class="flex h-full space-x-8">
-                <a
+                <router-link
                   v-for="page in navigation.pages"
                   :key="page.name"
-                  :href="page.href"
+                  :to="{ name: page.href }"
                   class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >{{ page.name }}</a
+                  >{{ page.name }}</router-link
                 >
               </div>
             </PopoverGroup>
@@ -137,8 +137,8 @@ import {
 // when app has multiple layouts. the navigation should be passed as props into header component
 const navigation = {
   pages: [
-    { name: 'Home', href: '#' },
-    { name: 'Categories', href: '#' },
+    { name: 'Home', href: 'home' },
+    { name: 'Categories', href: 'categories' },
   ],
 }
 
