@@ -80,18 +80,19 @@
           <h2 class="sr-only">Product information</h2>
           <p class="text-3xl tracking-tight text-gray-900">{{ product.price }}</p>
 
-          <form class="flex items-center gap-2 ">
+          <form class="flex items-center gap-2 mt-10">
             <button
               type="submit"
-              class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
+              class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
             >
               Add to cart
             </button>
             <button
               type="button"
+              aria-label="Add to favorites"
               @click="toggleFavorite"
-              :class="isFavorite ? 'text-amber-400' : 'text-gray-400'"
-              class="mt-10 flex w-14 rounded-md border border-transparent bg-transparent"
+              :class="isFavorite ? 'text-amber-400' : 'text-gray-300'"
+              class="w-14 rounded-md border border-transparent bg-transparent"
             >
               <StarIcon />
             </button>
