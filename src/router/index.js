@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Category from '@/views/Category.vue'
-import Categories from '@/views/Categories.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,17 +6,22 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('../views/HomeView.vue'),
     },
     {
       path: '/categories',
       name: 'categories',
-      component: Categories,
+      component: () => import('../views/Categories.vue'),
     },
     {
       path: '/categories/:slug',
       name: 'category',
-      component: Category,
+      component: () => import('../views/Category.vue'),
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: () => import('../views/ProductListingView.vue'),
     }
   ],
 })

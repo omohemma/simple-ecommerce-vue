@@ -129,7 +129,6 @@ import { Dialog, DialogPanel, PopoverGroup, TransitionChild, TransitionRoot } fr
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  ShoppingBagIcon,
   XMarkIcon,
   BookmarkIcon,
 } from '@heroicons/vue/24/outline'
@@ -138,6 +137,7 @@ import {
 const navigation = {
   pages: [
     { name: 'Home', href: 'home' },
+    { name: 'Collections', href: 'products' },
     { name: 'Categories', href: 'categories' },
   ],
 }
