@@ -104,7 +104,7 @@
 
               <!-- Favourites -->
               <div class="ml-4 flow-root lg:ml-6">
-                <a href="#" class="group -m-2 flex items-center p-2">
+                <router-link :to="{ name: 'favorites'}" class="group -m-2 flex items-center p-2">
                   <BookmarkIcon
                     class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
@@ -113,7 +113,7 @@
                     >0</span
                   >
                   <span class="sr-only">favourites</span>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
