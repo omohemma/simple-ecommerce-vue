@@ -16,14 +16,14 @@
     </section>
 
     <!--  Favorites Products  -->
-    <section class="bg-white">
+    <section class="bg-white py-16 sm:py-24">
       <ProductListing :products="products">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900">Your Favorite Products</h2>
       </ProductListing>
     </section>
 
     <!--  Last Viewed Products  -->
-    <section class="bg-gray-100">
+    <section class="bg-gray-100 py-16 sm:py-24">
       <ProductListing :products="products">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900">Your Last Viewed Products</h2>
       </ProductListing>
