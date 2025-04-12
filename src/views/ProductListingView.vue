@@ -2,7 +2,7 @@
   <div>
     <!--  Products Listing  -->
     <section class="bg-white py-16 sm:py-24">
-      <ProductListing :products="products">
+      <ProductListing :products="products" :show-favorite-button="true">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900">Top Picks Just for You</h2>
         <p class="text-base mt-2 font-light text-gray-900">
           Discover our curated selection of bestsellers, trending items, and everyday must-haves — all in one place.

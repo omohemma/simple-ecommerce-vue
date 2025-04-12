@@ -9,6 +9,7 @@
         :images="images"
         :price="price"
         :slug="slug"
+        :showFavoriteButton="showFavoriteButton"
       />
     </div>
   </div>
@@ -21,6 +22,10 @@ const { products } = defineProps({
   products: {
     type: Array,
     required: true,
+  },
+  showFavoriteButton: {
+    type: Boolean,
+    default: false,
   },
 })
 </script>
