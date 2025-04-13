@@ -162,7 +162,7 @@ import {
   Squares2X2Icon,
 } from '@heroicons/vue/20/solid'
 import ProductListing from '@/components/ProductListing.vue'
-import Loader from '@/components/icons/Loader.vue'
+import Loader from '@/components/Loader.vue'
 
 const store = useStore()
 const route = useRoute()
