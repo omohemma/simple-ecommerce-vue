@@ -2,7 +2,10 @@
   <div>
     <!--    Category Collection-->
     <section class="bg-gray-100">
-      <CategoryCollection :categories="categories">
+      <PlaceholderContainer v-if="isCategoriesLoading">
+        <CategoryPlaceholder v-for="i in 9" :key="i" />
+      </PlaceholderContainer>
+      <CategoryCollection v-else :categories="categories">
         <div
           class="flex flex-wrap items-center justify-between text-sm text-blue-700 font-semibold"
         >
@@ -17,32 +20,27 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref } from 'vue'
+import store from '@/store/index.js'
 import CategoryCollection from '@/components/CategoryCollection.vue'
+import CategoryPlaceholder from '@/components/CategoryPlaceholder.vue'
+import PlaceholderContainer from '@/components/PlaceholderContainer.vue'
 
-const categories = [
-  {
-    id: 2,
-    name: 'Electronics2',
-    slug: 'electronics2',
-    image: 'https://i.imgur.com/ZANVnHE.jpeg',
-    creationAt: '2025-04-10T21:22:01.000Z',
-    updatedAt: '2025-04-11T05:11:36.000Z',
-  },
-  {
-    id: 3,
-    name: 'Furniture',
-    slug: 'furniture',
-    image: 'https://i.imgur.com/Qphac99.jpeg',
-    creationAt: '2025-04-10T21:22:01.000Z',
-    updatedAt: '2025-04-10T21:22:01.000Z',
-  },
-  {
-    id: 4,
-    name: 'Shoes',
-    slug: 'shoes',
-    image: 'https://i.imgur.com/qNOjJje.jpeg',
-    creationAt: '2025-04-10T21:22:01.000Z',
-    updatedAt: '2025-04-10T21:22:01.000Z',
-  },
-]
+const isCategoriesLoading = ref(false)
+const getCategories = () => {
+  isCategoriesLoading.value = true
+  store
+    .dispatch('Category/getCategories')
+    .then(() => {
+      isCategoriesLoading.value = false
+    })
+    .catch(() => {
+      isCategoriesLoading.value = false
+    })
+}
+const categories = computed(() => store.getters['Category/categories'])
+
+onMounted(() => {
+  getCategories()
+})
 </script>
