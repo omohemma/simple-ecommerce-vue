@@ -36,7 +36,12 @@ export const actions = {
     return data
   },
   async addProductToFavorites({ commit }, id) {
-    const product = state.products.find((product) => product.id === id)
+    let product = {}
+    if (state.products.length === 0) {
+      product = state.product
+    } else {
+      product = state.products.find((product) => product.id === id)
+    }
     commit('SET_FAVORITE_PRODUCTS', [...state.favoriteProducts, product])
   },
   async removeProductFromFavorites({ commit }, id) {
@@ -55,7 +60,7 @@ export const getters = {
     return state.favoriteProducts
   },
   isProductFavorite: (state) => (id) => {
-    return state.favoriteProducts.find((product) => product.id === id)
+    return !!state.favoriteProducts.find((product) => product.id === id)
   },
 }
 
