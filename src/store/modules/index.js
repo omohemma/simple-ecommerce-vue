@@ -7,11 +7,15 @@ const modules = {};
 for (const key in files) {
   // if (key === "./index.js") continue;
 
+  const importModule = files[key]
+  const module = await importModule()
+
   const moduleName = key
     .replace(/(\.\/|\.js)/g, "")
+    .replace(/\.module$/, "")
     .replace(/^\w/, (c) => c.toUpperCase());
 
-  modules[moduleName] = files[key];
+  modules[moduleName] = module.default
 }
 
 export default modules;
