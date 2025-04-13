@@ -1,3 +1,3 @@
-export const saveStateToLocalStorage = (products) => {
-  localStorage.setItem('favoriteProducts', JSON.stringify(products))
+export const saveStateToLocalStorage = (products, key) => {
+  localStorage.setItem(key, JSON.stringify(products))
 }

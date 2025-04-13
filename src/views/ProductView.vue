@@ -86,7 +86,7 @@
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { StarIcon } from '@heroicons/vue/20/solid'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import Loader from '@/components/Loader.vue'
 
 const store = useStore()
@@ -109,6 +109,15 @@ const product = computed(() => {
 
 onMounted(() => {
   getProduct()
+
+  watch(
+    () => product.value.id,
+    (productId) => {
+      if (productId !== undefined) {
+        store.dispatch('Product/addProductToVisitedItems')
+      }
+    },
+  )
 })
 
 // Favorite Product
@@ -116,8 +125,6 @@ const isFavorite = computed(() => {
   return store.getters['Product/isProductFavorite'](product.value.id)
 })
 const toggleFavorite = (id, status) => {
-  console.log(id)
-  console.log(status)
   if (!status) {
     store.dispatch('Product/addProductToFavorites', id)
   } else {
