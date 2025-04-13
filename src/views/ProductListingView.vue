@@ -95,8 +95,10 @@
 import ProductListing from '@/components/ProductListing.vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid/index.js'
 import { ref, onMounted, computed } from 'vue'
-import store from '@/store/index.js'
-import Loader from '@/components/icons/Loader.vue'
+import Loader from '@/components/Loader.vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const offset = ref(0)
 const limit = ref(10)
