@@ -8,6 +8,7 @@ const initialState = () => {
   return {
     products: [],
     favoriteProducts: persistedFavoriteProducts,
+    product: {},
   }
 }
 
@@ -20,6 +21,9 @@ export const mutations = {
   SET_FAVORITE_PRODUCTS(state, products) {
     state.favoriteProducts = products
     saveStateToLocalStorage(products)
+  },
+  SET_PRODUCT(state, product) {
+    state.product = product
   },
   RESET() {
     const newState = initialState()
@@ -50,6 +54,11 @@ export const actions = {
       state.favoriteProducts.filter((product) => product.id !== id),
     )
   },
+  async getProduct({ commit }, slug) {
+    const { data } = await ProductService.getProductBySlug(slug)
+    commit('SET_PRODUCT', data)
+    return data
+  },
 }
 
 export const getters = {
@@ -61,6 +70,9 @@ export const getters = {
   },
   isProductFavorite: (state) => (id) => {
     return !!state.favoriteProducts.find((product) => product.id === id)
+  },
+  product(state) {
+    return state.product
   },
 }
 

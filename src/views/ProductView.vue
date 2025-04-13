@@ -1,63 +1,31 @@
 <template>
   <div class="bg-white">
-    <div class="pt-6">
-      <nav aria-label="Breadcrumb">
-        <ol
-          role="list"
-          class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
-        >
-          <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
-            <div class="flex items-center">
-              <a :href="breadcrumb.href" class="mr-2 text-sm font-medium text-gray-900">{{
-                breadcrumb.name
-              }}</a>
-              <svg
-                width="16"
-                height="20"
-                viewBox="0 0 16 20"
-                fill="currentColor"
-                aria-hidden="true"
-                class="h-5 w-4 text-gray-300"
-              >
-                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-              </svg>
-            </div>
-          </li>
-          <li class="text-sm">
-            <a
-              :href="product.href"
-              aria-current="page"
-              class="font-medium text-gray-500 hover:text-gray-600"
-              >{{ product.name }}</a
-            >
-          </li>
-        </ol>
-      </nav>
-
+    <Loader v-if="isLoading" />
+    <div v-else-if="Object.keys(product).length > 0 && !isLoading" class="pt-6">
       <!-- Image gallery -->
       <div
         class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
       >
         <img
-          :src="product.images[0].src"
-          :alt="product.images[0].alt"
+          :src="product?.images[0]"
+          :alt="product.title"
           class="hidden size-full rounded-lg object-cover lg:block"
         />
         <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
           <img
-            :src="product.images[1].src"
-            :alt="product.images[1].alt"
+            :src="product?.images[1]"
+            :alt="product.title"
             class="aspect-3/2 w-full rounded-lg object-cover"
           />
           <img
-            :src="product.images[2].src"
-            :alt="product.images[2].alt"
+            :src="product?.images[2]"
+            :alt="product.title"
             class="aspect-3/2 w-full rounded-lg object-cover"
           />
         </div>
         <img
-          :src="product.images[3].src"
-          :alt="product.images[3].alt"
+          :src="product?.images[2]"
+          :alt="product.title"
           class="aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-auto"
         />
       </div>
@@ -68,17 +36,15 @@
       >
         <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
           <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-            {{ product.name }}
+            {{ product.title }}
           </h1>
-          <h3 class="text-base mt-2 font-semibold text-gray-500">
-            Category Name
-          </h3>
+          <h3 class="text-base mt-2 font-semibold text-gray-500">{{ product?.category?.name }}</h3>
         </div>
 
         <!-- Options -->
         <div class="mt-4 lg:row-span-3 lg:mt-0">
           <h2 class="sr-only">Product information</h2>
-          <p class="text-3xl tracking-tight text-gray-900">{{ product.price }}</p>
+          <p class="text-3xl tracking-tight text-gray-900">${{ product.price }}</p>
 
           <form class="flex items-center gap-2 mt-10">
             <button
@@ -90,7 +56,7 @@
             <button
               type="button"
               aria-label="Add to favorites"
-              @click="toggleFavorite"
+              @click="toggleFavorite(product.id, isFavorite)"
               :class="isFavorite ? 'text-amber-400' : 'text-gray-300'"
               class="w-14 rounded-md border border-transparent bg-transparent"
             >
@@ -117,42 +83,45 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 import { StarIcon } from '@heroicons/vue/20/solid'
-import { ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
+import Loader from '@/components/Loader.vue'
 
-const isFavorite = ref(false)
+const store = useStore()
+const route = useRoute()
 
-const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Home', href: '#' },
-    { id: 2, name: 'Category name', href: '#' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+// Product
+const isLoading = ref(false)
+const slug = computed(() => route.params.slug)
+const getProduct = () => {
+  isLoading.value = true
+  store
+    .dispatch('Product/getProduct', slug.value)
+    .then(() => (isLoading.value = false))
+    .catch(() => (isLoading.value = false))
 }
 
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value
+const product = computed(() => {
+  return store.getters['Product/product']
+})
+
+onMounted(() => {
+  getProduct()
+})
+
+// Favorite Product
+const isFavorite = computed(() => {
+  return store.getters['Product/isProductFavorite'](product.value.id)
+})
+const toggleFavorite = (id, status) => {
+  console.log(id)
+  console.log(status)
+  if (!status) {
+    store.dispatch('Product/addProductToFavorites', id)
+  } else {
+    store.dispatch('Product/removeProductFromFavorites', id)
+  }
 }
 </script>
