@@ -19,7 +19,7 @@
       </div>
       <button
         type="button"
-        @click="toggleFavorite"
+        @click="toggleFavorite(id, isFavorite)"
         v-show="showFavoriteButton"
         :class="isFavorite ? 'text-amber-400' : 'text-gray-300'"
         class="w-8 rounded-md border border-transparent bg-transparent"
@@ -33,14 +33,27 @@
 <script setup>
 import { StarIcon } from '@heroicons/vue/20/solid'
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
 
-const isFavorite = ref(false)
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value
+const store = useStore()
+
+const isFavorite = computed(() => {
+  return store.getters['Product/isProductFavorite'](id)
+})
+const toggleFavorite = (id, status) => {
+  if (!status) {
+    store.dispatch('Product/addProductToFavorites', id)
+  } else {
+    store.dispatch('Product/removeProductFromFavorites', id)
+  }
 }
 
-const { title, images, price, slug, category } = defineProps({
+const { id, title, images, price, slug, category } = defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -50,7 +63,7 @@ const { title, images, price, slug, category } = defineProps({
     required: true,
   },
   price: {
-    type: String,
+    type: [String, Number],
     required: true,
   },
   slug: {

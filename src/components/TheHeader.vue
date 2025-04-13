@@ -43,9 +43,11 @@
               <!-- Links -->
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <router-link  :to="{ name: page.href }" class="-m-2 block p-2 font-medium text-gray-900">{{
-                    page.name
-                  }}</router-link>
+                  <router-link
+                    :to="{ name: page.href }"
+                    class="-m-2 block p-2 font-medium text-gray-900"
+                    >{{ page.name }}</router-link
+                  >
                 </div>
               </div>
             </DialogPanel>
@@ -70,7 +72,7 @@
 
             <!-- Logo -->
             <div class="ml-4 flex lg:ml-0">
-              <router-link  :to="{ name: 'home' }">
+              <router-link :to="{ name: 'home' }">
                 <span class="sr-only">Your Company</span>
                 <img
                   class="h-8 w-auto"
@@ -104,14 +106,15 @@
 
               <!-- Favourites -->
               <div class="ml-4 flow-root lg:ml-6">
-                <router-link :to="{ name: 'favorites'}" class="group -m-2 flex items-center p-2">
+                <router-link :to="{ name: 'favorites' }" class="group -m-2 flex items-center p-2">
                   <BookmarkIcon
-                    class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
+                    :class=" favoriteProducts.length > 0 ? 'text-indigo-600 fill-indigo-600' : 'text-gray-400' "
+                    class="size-6 shrink-0 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
-                  <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-                    >0</span
-                  >
+                  <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{
+                    favoriteProducts.length
+                  }}</span>
                   <span class="sr-only">favourites</span>
                 </router-link>
               </div>
@@ -124,14 +127,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Dialog, DialogPanel, PopoverGroup, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  XMarkIcon,
-  BookmarkIcon,
-} from '@heroicons/vue/24/outline'
+import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon, BookmarkIcon } from '@heroicons/vue/24/outline'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 // when app has multiple layouts. the navigation should be passed as props into header component
 const navigation = {
@@ -143,4 +144,6 @@ const navigation = {
 }
 
 const open = ref(false)
+
+const favoriteProducts = computed(() => store.getters['Product/favoriteProducts'])
 </script>

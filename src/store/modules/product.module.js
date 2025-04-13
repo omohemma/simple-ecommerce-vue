@@ -1,26 +1,33 @@
 import ProductService from '@/apis/product.js'
+import { saveStateToLocalStorage } from '@/store/_utils.js'
 
-export const namespaced = true;
+export const namespaced = true
 
+const persistedFavoriteProducts = JSON.parse(localStorage.getItem('favoriteProducts')) || []
 const initialState = () => {
   return {
     products: [],
-  };
-};
+    favoriteProducts: persistedFavoriteProducts,
+  }
+}
 
-export const state = initialState();
+export const state = initialState()
 
 export const mutations = {
   SET_PRODUCTS(state, products) {
     state.products = products
   },
-  RESET() {
-    const newState = initialState();
-    Object.keys(newState).forEach((key) => {
-      state[key] = newState[key];
-    });
+  SET_FAVORITE_PRODUCTS(state, products) {
+    state.favoriteProducts = products
+    saveStateToLocalStorage(products)
   },
-};
+  RESET() {
+    const newState = initialState()
+    Object.keys(newState).forEach((key) => {
+      state[key] = newState[key]
+    })
+  },
+}
 
 export const actions = {
   async getProducts({ commit }, payload) {
@@ -28,13 +35,29 @@ export const actions = {
     commit('SET_PRODUCTS', data)
     return data
   },
-};
+  async addProductToFavorites({ commit }, id) {
+    const product = state.products.find((product) => product.id === id)
+    commit('SET_FAVORITE_PRODUCTS', [...state.favoriteProducts, product])
+  },
+  async removeProductFromFavorites({ commit }, id) {
+    commit(
+      'SET_FAVORITE_PRODUCTS',
+      state.favoriteProducts.filter((product) => product.id !== id),
+    )
+  },
+}
 
 export const getters = {
   products(state) {
-    return state.products;
+    return state.products
   },
-};
+  favoriteProducts(state) {
+    return state.favoriteProducts
+  },
+  isProductFavorite: (state) => (id) => {
+    return state.favoriteProducts.find((product) => product.id === id)
+  },
+}
 
 export default {
   namespaced,
