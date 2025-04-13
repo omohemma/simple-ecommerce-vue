@@ -20,7 +20,7 @@
 <script setup>
 import { useCategories } from '@/composables/useCategories.js'
 import CategoryCollection from '@/components/CategoryCollection.vue'
-import Loader from '@/components/icons/Loader.vue'
+import Loader from '@/components/Loader.vue'
 
 const { isLoading, categories } = useCategories()
 </script>
