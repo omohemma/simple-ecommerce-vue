@@ -2,7 +2,7 @@
   <div>
     <!--    Category Collection-->
     <section class="bg-gray-100">
-      <PlaceholderContainer v-if="isCategoriesLoading">
+      <PlaceholderContainer v-if="isLoading">
         <CategoryPlaceholder v-for="i in 9" :key="i" />
       </PlaceholderContainer>
       <CategoryCollection v-else :categories="categories">
@@ -20,27 +20,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
-import store from '@/store/index.js'
+import { useCategories } from '@/composables/useCategories.js'
 import CategoryCollection from '@/components/CategoryCollection.vue'
 import CategoryPlaceholder from '@/components/CategoryPlaceholder.vue'
 import PlaceholderContainer from '@/components/PlaceholderContainer.vue'
 
-const isCategoriesLoading = ref(false)
-const getCategories = () => {
-  isCategoriesLoading.value = true
-  store
-    .dispatch('Category/getCategories')
-    .then(() => {
-      isCategoriesLoading.value = false
-    })
-    .catch(() => {
-      isCategoriesLoading.value = false
-    })
-}
-const categories = computed(() => store.getters['Category/categories'])
-
-onMounted(() => {
-  getCategories()
-})
+const { isLoading, categories } = useCategories()
 </script>

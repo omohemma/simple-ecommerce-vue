@@ -2,7 +2,7 @@
   <div>
     <!--    Category Collection-->
     <section class="bg-gray-100">
-      <PlaceholderContainer v-if="isCategoriesLoading">
+      <PlaceholderContainer v-if="isLoading">
         <CategoryPlaceholder v-for="i in 3" :key="i" />
       </PlaceholderContainer>
       <CategoryCollection v-else :categories="categories">
@@ -35,31 +35,13 @@
 </template>
 
 <script setup>
-import store from '@/store/index.js'
-import { computed, onMounted, ref } from 'vue'
+import { useCategories } from '@/composables/useCategories.js'
 import CategoryCollection from '@/components/CategoryCollection.vue'
 import ProductListing from '@/components/ProductListing.vue'
 import PlaceholderContainer from '@/components/PlaceholderContainer.vue'
 import CategoryPlaceholder from '@/components/CategoryPlaceholder.vue'
 
-const isCategoriesLoading = ref(false)
-const getCategories = () => {
-  let query = "?limit=3"
-  isCategoriesLoading.value = true
-  store
-    .dispatch('Category/getCategories', query)
-    .then(() => {
-      isCategoriesLoading.value = false
-    })
-    .catch(() => {
-      isCategoriesLoading.value = false
-    })
-}
-const categories = computed(() => store.getters['Category/categories'])
-
-onMounted(() => {
-  getCategories()
-})
+const { isLoading, categories } = useCategories(3)
 
 const products = [
   {
