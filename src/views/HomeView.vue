@@ -15,36 +15,9 @@
       </CategoryCollection>
     </section>
 
-    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none">
-        <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <div class="ph-item">
-            <div class="ph-col-12">
-              <div class="ph-picture"></div>
-              <div class="ph-row">
-                <div class="big ph-col-12"></div>
-              </div>
-            </div>
-          </div>
-          <div class="ph-item">
-            <div class="ph-col-12">
-              <div class="ph-picture"></div>
-              <div class="ph-row">
-                <div class="big ph-col-12"></div>
-              </div>
-            </div>
-          </div>
-          <div class="ph-item">
-            <div class="ph-col-12">
-              <div class="ph-picture"></div>
-              <div class="ph-row">
-                <div class="big ph-col-12"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PlaceholderContainer>
+      <CategoryPlaceholder v-for="i in 3" :key="i" />
+    </PlaceholderContainer>
 
     <!--  Favorites Products  -->
     <section class="bg-white py-16 sm:py-24">
@@ -65,6 +38,8 @@
 <script setup>
 import CategoryCollection from '@/components/CategoryCollection.vue'
 import ProductListing from '@/components/ProductListing.vue'
+import PlaceholderContainer from '@/components/PlaceholderContainer.vue'
+import CategoryPlaceholder from '@/components/CategoryPlaceholder.vue'
 
 const categories = [
   {
