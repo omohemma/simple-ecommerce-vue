@@ -5,6 +5,7 @@
       <ProductItem
         v-for="{ id, title, images, price, slug, category } in products"
         :key="id"
+        :id="id"
         :title="title"
         :images="images"
         :price="price"
