@@ -2,9 +2,7 @@
   <div>
     <!--    Category Collection-->
     <section class="bg-gray-100">
-      <PlaceholderContainer v-if="isLoading">
-        <CategoryPlaceholder v-for="i in 3" :key="i" />
-      </PlaceholderContainer>
+      <Loader v-if="isLoading"/>
       <CategoryCollection v-else :categories="categories">
         <div
           class="flex flex-wrap items-center justify-between text-sm text-blue-700 font-semibold"
@@ -38,8 +36,7 @@
 import { useCategories } from '@/composables/useCategories.js'
 import CategoryCollection from '@/components/CategoryCollection.vue'
 import ProductListing from '@/components/ProductListing.vue'
-import PlaceholderContainer from '@/components/PlaceholderContainer.vue'
-import CategoryPlaceholder from '@/components/CategoryPlaceholder.vue'
+import Loader from '@/components/icons/Loader.vue'
 
 const { isLoading, categories } = useCategories(3)
 
