@@ -7,4 +7,7 @@ export default {
   getCategoryBySlug(slug) {
     return apiClient.get(`/categories/slug/${slug}`);
   },
+  getCategoryProducts({id, offset, limit}) {
+    return apiClient.get(`/categories/${id}/products?offset=${offset}&limit=${limit}`);
+  },
 }

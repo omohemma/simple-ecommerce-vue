@@ -14,7 +14,7 @@
             {{ title }}
           </router-link>
         </h3>
-        <p class="text-xs mt-1 font-semibold text-gray-400">Category Name</p>
+        <p class="text-xs mt-1 font-semibold text-gray-400 capitalize">{{ category.name }}</p>
         <p class="text-base mt-1 tracking-tight text-gray-900">${{ price }}</p>
       </div>
       <button
@@ -40,7 +40,7 @@ const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value
 }
 
-const { title, images, price, slug } = defineProps({
+const { title, images, price, slug, category } = defineProps({
   title: {
     type: String,
     required: true,
@@ -60,6 +60,10 @@ const { title, images, price, slug } = defineProps({
   showFavoriteButton: {
     type: Boolean,
     default: false,
+  },
+  category: {
+    type: Object,
+    required: true,
   },
 })
 </script>

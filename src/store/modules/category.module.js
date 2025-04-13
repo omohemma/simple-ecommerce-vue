@@ -5,6 +5,7 @@ const initialState = () => {
   return {
     categories: [],
     category: {},
+    products: [],
   }
 }
 
@@ -16,6 +17,9 @@ export const mutations = {
   },
   SET_CATEGORY(state, category) {
     state.category = category
+  },
+  SET_CATEGORY_PRODUCTS(state, products) {
+    state.products = products
   },
   RESET() {
     const newState = initialState()
@@ -36,6 +40,11 @@ export const actions = {
     commit('SET_CATEGORY', data)
     return data
   },
+  async getCategoryProducts({ commit }, payload) {
+    const { data } = await CategoryService.getCategoryProducts(payload)
+    commit('SET_CATEGORY_PRODUCTS', data)
+    return data
+  },
 }
 
 export const getters = {
@@ -47,6 +56,9 @@ export const getters = {
   },
   category(state) {
     return state.category;
+  },
+  categoryProducts(state) {
+    return state.products;
   },
 }
 

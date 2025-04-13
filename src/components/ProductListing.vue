@@ -3,12 +3,13 @@
     <slot></slot>
     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
       <ProductItem
-        v-for="{ id, title, images, price, slug } in products"
+        v-for="{ id, title, images, price, slug, category } in products"
         :key="id"
         :title="title"
         :images="images"
         :price="price"
         :slug="slug"
+        :category="category"
         :showFavoriteButton="showFavoriteButton"
       />
     </div>
