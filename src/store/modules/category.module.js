@@ -4,6 +4,7 @@ export const namespaced = true
 const initialState = () => {
   return {
     categories: [],
+    category: {},
   }
 }
 
@@ -12,6 +13,9 @@ export const state = initialState()
 export const mutations = {
   SET_CATEGORIES(state, categories) {
     state.categories = categories
+  },
+  SET_CATEGORY(state, category) {
+    state.category = category
   },
   RESET() {
     const newState = initialState()
@@ -27,11 +31,22 @@ export const actions = {
     commit('SET_CATEGORIES', data)
     return data
   },
+  async getCategory({ commit }, slug) {
+    const { data } = await CategoryService.getCategoryBySlug(slug)
+    commit('SET_CATEGORY', data)
+    return data
+  },
 }
 
 export const getters = {
   categories(state) {
     return state.categories;
+  },
+  getCategoryBySlug: (state) => (slug) => {
+    return state.categories.find(category => category.slug === slug);
+  },
+  category(state) {
+    return state.category;
   },
 }
 

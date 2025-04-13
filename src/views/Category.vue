@@ -3,7 +3,9 @@
     <div>
       <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
-          <h1 class="text-4xl font-bold tracking-tight text-gray-900">Category Name</h1>
+          <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">
+            {{ category.name ?? '' }}
+          </h1>
 
           <div class="flex items-center">
             <Menu as="div" class="relative inline-block text-left">
@@ -149,14 +151,38 @@
 </template>
 
 <script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import {
   ChevronDownIcon,
-  Squares2X2Icon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  Squares2X2Icon,
 } from '@heroicons/vue/20/solid'
 import ProductListing from '@/components/ProductListing.vue'
+
+const store = useStore()
+const route = useRoute()
+
+const slug = computed(() => route.params.slug)
+const category = computed(() => {
+  const matchedCategory = store.getters['Category/getCategoryBySlug'](slug.value)
+  if (matchedCategory) {
+    return matchedCategory
+  } else {
+    return store.getters['Category/category']
+  }
+})
+
+onMounted(() => {
+  console.log(store.state.Category.categories.length)
+  if (!store.state.Category.categories.length) {
+    store.dispatch('Category/getCategory', slug.value)
+  }
+})
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
