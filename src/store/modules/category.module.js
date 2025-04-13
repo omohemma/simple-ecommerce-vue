@@ -22,7 +22,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async getCategories({ commit }, payload) {
+  async getCategories({ commit }, payload = "") {
     const { data } = await CategoryService.getCategories(payload)
     commit('SET_CATEGORIES', data)
     return data
