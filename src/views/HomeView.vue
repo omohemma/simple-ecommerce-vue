@@ -7,12 +7,43 @@
           class="flex flex-wrap items-center justify-between text-sm text-blue-700 font-semibold"
         >
           <h2 class="text-2xl font-bold text-gray-900">Shop by Category</h2>
-          <router-link class="" :to="{'name': 'categories'}"> Browse all categories</router-link>
+          <router-link class="" :to="{ name: 'categories' }"> Browse all categories</router-link>
         </div>
         <p class="text-base mt-2 font-light text-gray-900">
           Explore a wide variety of products by browsing through our categorized collections.
         </p>
       </CategoryCollection>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none">
+        <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+          <div class="ph-item">
+            <div class="ph-col-12">
+              <div class="ph-picture"></div>
+              <div class="ph-row">
+                <div class="big ph-col-12"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ph-item">
+            <div class="ph-col-12">
+              <div class="ph-picture"></div>
+              <div class="ph-row">
+                <div class="big ph-col-12"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ph-item">
+            <div class="ph-col-12">
+              <div class="ph-picture"></div>
+              <div class="ph-row">
+                <div class="big ph-col-12"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!--  Favorites Products  -->
