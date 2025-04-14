@@ -63,6 +63,12 @@
             <!-- Product grid -->
             <div class="lg:col-span-4 bg-white">
               <Loader v-if="isLoading" />
+              <EmptyContent v-else-if="products.length === 0">
+                <h2 class="text-2xl font-bold tracking-tight text-gray-900">No Products Found</h2>
+                <p class="text-base mt-2 font-light text-gray-900">
+                  We couldn't find any products that match pagination criteria.
+                </p>
+              </EmptyContent>
               <ProductListing v-else :products="products" />
             </div>
           </div>
@@ -91,6 +97,7 @@ import ProductListing from '@/components/ProductListing.vue'
 import Loader from '@/components/Loader.vue'
 import Pagination from '@/components/Pagination.vue'
 import { usePagination } from '@/composables/usePagination.js'
+import EmptyContent from '@/components/EmptyContent.vue'
 
 const store = useStore()
 const route = useRoute()
