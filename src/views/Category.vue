@@ -69,7 +69,7 @@
 
           <!-- Pagination: hardcoded total pages because API doesn't provide it  -->
           <Pagination
-            :total-pages="10"
+            :total-pages="totalPages"
             :current-page="currentPage"
             :visible-pages="5"
             @page-change="currentPage = $event"
@@ -90,6 +90,7 @@ import { ChevronDownIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
 import ProductListing from '@/components/ProductListing.vue'
 import Loader from '@/components/Loader.vue'
 import Pagination from '@/components/Pagination.vue'
+import { usePagination } from '@/composables/usePagination.js'
 
 const store = useStore()
 const route = useRoute()
@@ -104,9 +105,6 @@ const category = computed(() => {
   }
 })
 
-const offset = ref(0)
-const limit = ref(10)
-const currentPage = ref(1)
 const isLoading = ref(false)
 const getCategoryProducts = () => {
   let payload = { id: category.value.id, offset: offset.value, limit: limit.value }
@@ -117,10 +115,7 @@ const getCategoryProducts = () => {
     .catch(() => (isLoading.value = false))
 }
 
-watch(currentPage, () => {
-  offset.value = (currentPage.value - 1) * limit.value
-  getCategoryProducts()
-})
+const { offset, limit, currentPage, totalPages } = usePagination(getCategoryProducts)
 
 const products = computed(() => {
   return store.getters['Category/categoryProducts']

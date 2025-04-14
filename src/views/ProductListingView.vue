@@ -13,7 +13,7 @@
 
       <!-- Pagination: hardcoded total pages because API doesn't provide it  -->
       <Pagination
-        :total-pages="10"
+        :total-pages="totalPages"
         :current-page="currentPage"
         :visible-pages="5"
         @page-change="currentPage = $event"
@@ -28,12 +28,10 @@ import { ref, onMounted, computed, watch } from 'vue'
 import Loader from '@/components/Loader.vue'
 import { useStore } from 'vuex'
 import Pagination from '@/components/Pagination.vue'
+import { usePagination } from '@/composables/usePagination.js'
 
 const store = useStore()
 
-const offset = ref(0)
-const limit = ref(10)
-const currentPage = ref(1)
 const isLoading = ref(false)
 const getProducts = () => {
   let payload = { offset: offset.value, limit: limit.value }
@@ -44,10 +42,7 @@ const getProducts = () => {
     .catch(() => (isLoading.value = false))
 }
 
-watch(currentPage, () => {
-  offset.value = (currentPage.value - 1) * limit.value
-  getProducts()
-})
+const { offset, limit, currentPage, totalPages } = usePagination(getProducts)
 
 const products = computed(() => {
   return store.getters['Product/products']
