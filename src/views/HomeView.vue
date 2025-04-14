@@ -112,7 +112,7 @@ const store = useStore()
 
 const isProductsLoading = ref(false)
 const offset = ref(0)
-const limit = ref(50)
+const limit = ref(48)
 const getProducts = () => {
   let payload = { offset: offset.value, limit: limit.value }
   isProductsLoading.value = true

@@ -14,7 +14,12 @@
             {{ title }}
           </router-link>
         </h3>
-        <p class="text-xs mt-1 font-semibold text-gray-400 capitalize">{{ category.name }}</p>
+        <router-link
+          class="text-xs mt-1 font-semibold text-gray-400 capitalize"
+          :to="{ name: 'category', params: { slug: category.slug } }"
+        >
+          {{ category.name }}
+        </router-link>
         <p class="text-base mt-1 tracking-tight text-gray-900">${{ price }}</p>
       </div>
       <button
