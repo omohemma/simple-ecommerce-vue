@@ -30,7 +30,7 @@
 
 <script setup>
 import ProductListing from '@/components/ProductListing.vue'
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Loader from '@/components/Loader.vue'
 import { useStore } from 'vuex'
 import Pagination from '@/components/Pagination.vue'

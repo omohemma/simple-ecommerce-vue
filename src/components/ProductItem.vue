@@ -33,7 +33,7 @@
 <script setup>
 import { StarIcon } from '@heroicons/vue/20/solid'
 
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
