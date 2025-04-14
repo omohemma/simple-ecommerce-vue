@@ -88,12 +88,19 @@ npm run dev
     - Fully **responsive** across devices.
     - Includes **loading indicators** and **error states** for API requests.
     - Handles **empty states** gracefully with informative messages and fallback visuals.
+- **Commit Message Standardization**:
+  Husky has been configured to enforce standard commit messages using commitlint. This ensures all commit messages follow a consistent pattern for better readability and versioning. Commits should follow the Conventional Commit specification, which improves automation for release management.
 
 ---
 
 ## 📡 API
 
 This app uses the free and public **[Fake Store API](https://fakestoreapi.com/)** to fetch products and categories.
+
+---
+##  ⏱ Time Tracking Report
+
+For the time tracking report related to the development of this project, you can view the detailed report **[here](https://drive.google.com/file/d/1sKwa9UtYahu3vBebjo3tqS8SAP9slcfq/view?usp=sharing)**.
 
 ---
 
